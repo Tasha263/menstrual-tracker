@@ -1,0 +1,318 @@
+<NavigationBarTop>:
+    #size_hint_y: None
+    size_hint: (1.0, 0.09)
+    height: dp(56)
+    md_bg_color: app.theme_cls.primary_color
+    pos_hint: {'top': 1}
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        padding: dp(10)
+
+        MDLabel:
+            text: 'Menstrual Tracker'
+            font_style: 'H6'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            #size_hint_x: None
+            size_hint: (0.2, 0.9)
+            pos_hint: {'center_x': 0.9, 'center_y': 0.9 }
+            width: self.texture_size[0]
+            height: self.parent.height
+
+WindowManager:
+    Home:
+    QuickPrediction:
+    PastData:
+    SetPasswordScreen:
+    EnterPasswordScreen:
+
+<NavigationBar>:
+    size_hint_y: None
+    height: dp(56)
+    md_bg_color: app.theme_cls.primary_color
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        padding: dp(10)
+
+        MDIconButton:
+            icon: 'home'
+            pos_hint: {'center_y': 0.5}
+            on_release: app.root.current = 'home'
+
+        MDIconButton:
+            icon: 'calendar'
+            pos_hint: {'center_y': 0.5}
+            on_release: app.show_date_picker()
+
+        MDIconButton:
+            icon: 'chart-pie'
+            pos_hint: {'center_y': 0.5}
+            on_release: app.root.current = 'pastdata'
+
+<SetPasswordScreen>:
+    name: 'set_password'
+
+    GridLayout:
+        cols: 1
+        size: root.width, root.height
+        padding: 150
+        spacing: 10
+        md_bg_color: (241/255, 143/255, 220/255, 1)
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: 20
+            #md_bg_color: (241/255, 143/255, 220/255, 1)
+
+            MDLabel:
+                text: 'Set Password'
+                font_style: 'H6'
+                halign: 'center'
+
+            MDTextField:
+                id: password_input
+                hint_text: 'Enter Password'
+                password: True
+
+            MDTextField:
+                id: confirm_password_input
+                hint_text: 'Confirm Password'
+                password: True
+
+            MDRaisedButton:
+                text: 'Set Password'
+                on_release: app.set_password(password_input.text, confirm_password_input.text)
+            MDRaisedButton:
+                text: 'Delete Password'
+                on_release: root.delete_password()
+            MDRaisedButton:
+                text: 'Home'
+                on_release: app.root.current = 'home'
+                #pos_hint: {'center_x': 0.8, 'center_y': 0.13}
+
+<EnterPasswordScreen>:
+    name: 'enter_password'
+
+    GridLayout:
+        cols: 1
+        size: root.width, root.height
+        padding: 150
+        spacing: 10
+        md_bg_color: (241/255, 143/255, 220/255, 1)
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: 20
+            #md_bg_color: (241/255, 143/255, 220/255, 1)
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: (1.0, 0.9)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5 }
+            MDLabel:
+                text: 'Enter Password'
+                font_style: 'H6'
+                halign: 'center'
+                size_hint: (1.0, 0.3)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9 }
+            MDTextField:
+                id: password_input
+                hint_text: 'Enter Password'
+                password: True
+            MDRaisedButton:
+                text: 'OK'
+                on_release: app.verify_password(password_input.text)
+
+
+<Home>:
+    name: 'home'
+
+    NavigationBarTop:
+    NavigationBar:
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        #spacing: 3
+        #size_hint: None, None
+        #size: 1600,865
+        #md_bg_color: (239/255, 151/255, 217/255, 1)
+
+    MDLabel:
+        id: medical_advice
+        text: ''
+        theme_text_color: "Secondary"
+        color: 1, 0, 0, 1
+        halign: "center"
+        size_hint: (1.0, 0.09)
+        font_size: '20sp'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.8 }
+
+    MDLabel:
+        id: medical_advice1
+        text: ''
+        theme_text_color: "Secondary"
+        color: 1, 0, 0, 1
+        halign: "center"
+        size_hint: (1.0, 0.09)
+        font_size: '20sp'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.85 }
+
+    MDCard:
+        size_hint: None, None
+        size: 400,400
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5 }
+        elevation: 0
+        padding: 25
+        spacing: 25
+        orientation: 'vertical'
+        #md_bg_color: (239/255, 151/255, 217/255, 1)
+        md_bg_color: app.theme_cls.primary_color
+
+
+        MDLabel:
+            id: cycle_info
+            text: ''
+            theme_text_color: "Secondary"
+            color: 1, 1, 1, 1
+            halign: "center"
+            size_hint: (1.0, 0.09)
+            font_size: '20sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5 }
+        MDLabel:
+            id: prediction_info
+            text: ''
+            theme_text_color: "Secondary"
+            color: 1, 1, 1, 1
+            halign: "center"
+            font_size: '20sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5 }
+        MDLabel:
+            id: date_label
+            text: ''
+            theme_text_color: "Secondary"
+            color: 0, 0, 0, 1
+            halign: "center"
+            size_hint: (1.0, 0.09)
+            font_size: '20sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5 }
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        spacing: 20
+        #md_bg_color: (241/255, 143/255, 220/255, 1)
+        MDRaisedButton:
+            text: 'Quick Prediction'
+            on_release: app.root.current = 'Quick'
+            #pos_hint: {'center_x': 0.8}
+            pos_hint: {'center_x': 0.8, 'center_y': 0.2 }
+        MDRaisedButton:
+            text: 'My Data'
+            on_release: app.root.current = 'pastdata'
+            #pos_hint: {'center_x': 0.8}
+            pos_hint: {'center_x': 0.8, 'center_y': 0.2 }
+        MDRaisedButton:
+            text: 'Open Calendar'
+            on_release: app.show_date_picker()
+            #pos_hint: {'center_x': 0.8}
+            pos_hint: {'center_x': 0.3, 'center_y': 0.2 }
+        MDRaisedButton:
+            text: 'Set Password'
+            on_release: app.root.current = 'set_password'
+            #pos_hint: {'center_x': 0.8}
+            pos_hint: {'center_x': 0., 'center_y': 0.2 }
+
+<QuickPrediction>:
+    name: 'Quick'
+    date1: date1
+    date2: date2
+    date3: date3
+
+    NavigationBarTop:
+    NavigationBar:
+
+    GridLayout:
+        cols: 1
+        size: root.width, root.height
+        padding: 150
+        spacing: 10
+        md_bg_color: (241/255, 143/255, 220/255, 1)
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: 20
+            #md_bg_color: (241/255, 143/255, 220/255, 1)
+
+            MDBoxLayout:
+                orientation: 'vertical'
+
+                MDLabel:
+                    text: 'Enter last period date from 2 months ago'
+                    theme_text_color: "Secondary"
+                MDTextField:
+                    multiline: False
+                    hint_text: 'YYYY MM DD'
+                    input_type: 'number'
+                    id: date1
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDLabel:
+                    text: 'Enter last period date from 1 month ago'
+                    theme_text_color: "Secondary"
+                MDTextField:
+                    multiline: False
+                    hint_text: 'YYYY MM DD'
+                    input_type: 'number'
+                    id: date2
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDLabel:
+                    text: 'Enter last period date'
+                    theme_text_color: "Secondary"
+                MDTextField:
+                    multiline: False
+                    hint_text: 'YYYY MM DD'
+                    input_type: 'number'
+                    id: date3
+
+
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        MDRaisedButton:
+            text: 'Calculate Prediction'
+            on_release: root.calculate_prediction()
+            pos_hint: {'center_x': 0.8, 'center_y': 0.13}
+        MDRaisedButton:
+            text: 'Home'
+            on_release: app.root.current = 'home'
+            pos_hint: {'center_x': 0.8, 'center_y': 0.13}
+        MDRaisedButton:
+            text: 'My Data'
+            on_release: app.root.current = 'pastdata'
+            pos_hint: {'center_x': 0.8, 'center_y': 0.13}
+
+<PastData>:
+    name: 'pastdata'
+
+    NavigationBarTop:
+    NavigationBar:
+
+    ScrollView:
+        MDList:
+            id: data_layout
+            size_hint: (0.99, 0.9)
+            height: dp(10)
+            padding: 90
+            #md_bg_color: (241/255, 143/255, 220/255, 1)
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        spacing: 20
+        #md_bg_color: (241/255, 143/255, 220/255, 1)
+        MDRaisedButton:
+            text: 'Quick Prediction'
+            on_release: app.root.current = 'Quick'
+            pos_hint: {'center_x': 0.3, 'center_y': 0.15}
+        MDRaisedButton:
+            text: 'Home'
+            on_release: app.root.current = 'home'
+            pos_hint: {'center_x': 0.3, 'center_y': 0.15}
